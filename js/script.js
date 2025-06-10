@@ -4,8 +4,10 @@ function updateTimer() {
     const now = new Date();
     const diff = endDate - now;
 
+    const timer = document.getElementById('timer');
+    
     if (diff <= 0) {
-        document.getElementById('timer').innerHTML = "Лига началась!";
+        timer.textContent = "ЛИГА НАЧАЛАСЬ!";
         return;
     }
 
@@ -14,21 +16,52 @@ function updateTimer() {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    document.getElementById('timer').innerHTML = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
+    timer.textContent = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
 }
 
-// Автоопределение ссылки сайта
-document.addEventListener('DOMContentLoaded', function() {
+// Работа с таблицей
+document.addEventListener('DOMContentLoaded', () => {
     updateTimer();
     setInterval(updateTimer, 1000);
 
-    const currentUrl = window.location.href;
-    const urlElement = document.getElementById('site-url');
-    urlElement.href = currentUrl;
-    urlElement.textContent = currentUrl;
+    const table = document.getElementById('poe-table');
+    const tbody = table.querySelector('tbody');
 
-    document.getElementById('copy-url').addEventListener('click', function() {
-        navigator.clipboard.writeText(currentUrl);
-        document.getElementById('copy-message').textContent = "Скопировано!";
+    // Добавление строки
+    document.getElementById('add-row').addEventListener('click', () => {
+        const classInput = document.getElementById('class-input');
+        const skillInput = document.getElementById('skill-input');
+        const linkInput = document.getElementById('link-input');
+
+        if (!classInput.value || !skillInput.value) return;
+
+        const newRow = document.createElement('tr');
+        
+        // Проверка и форматирование ссылки
+        let link = linkInput.value;
+        if (link && !link.startsWith('http')) {
+            link = 'https://' + link;
+        }
+
+        newRow.innerHTML = `
+            <td>${classInput.value}</td>
+            <td>${skillInput.value}</td>
+            <td>${link ? `<a href="${link}" target="_blank">Открыть</a>` : '—'}</td>
+            <td><button class="delete-btn">Уебать</button></td>
+        `;
+
+        tbody.appendChild(newRow);
+        
+        // Очистка полей
+        classInput.value = '';
+        skillInput.value = '';
+        linkInput.value = '';
+    });
+
+    // Удаление строки
+    table.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-btn')) {
+            e.target.closest('tr').remove();
+        }
     });
 });
