@@ -24,43 +24,18 @@ h1 {
     color: #ffffff;
 }
 
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.tab-button {
-    padding: 10px 20px;
-    margin: 0 5px;
-    background-color: #3a3a3a;
-    border: none;
-    color: #e0e0e0;
-    cursor: pointer;
-    border-radius: 5px 5px 0 0;
-}
-
-.tab-button.active {
-    background-color: #c5a059;
-    color: #1a1a1a;
-}
-
-.tab-content {
-    display: none;
+.table-container {
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
     background-color: #2a2a2a;
     border-radius: 5px;
-    margin: 0 auto;
-    max-width: 800px;
-}
-
-.tab-content.active {
-    display: block;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
 th, td {
@@ -72,4 +47,17 @@ th, td {
 th {
     background-color: #3a3a3a;
     color: #c5a059;
+}
+
+button {
+    background-color: #c5a059;
+    color: #1a1a1a;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #d4b070;
 }
