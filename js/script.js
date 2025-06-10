@@ -1,6 +1,6 @@
 // Таймер
 function updateTimer() {
-    const endDate = new Date('2025-06-13T22:00:00');
+    const endDate = new Date('2025-06-13T23:00:00');
     const now = new Date();
     const diff = endDate - now;
 
