@@ -24,18 +24,43 @@ h1 {
     color: #ffffff;
 }
 
-.table-container {
-    max-width: 800px;
-    margin: 20px auto;
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    background-color: #3a3a3a;
+    border: none;
+    color: #e0e0e0;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+}
+
+.tab-button.active {
+    background-color: #c5a059;
+    color: #1a1a1a;
+}
+
+.tab-content {
+    display: none;
     padding: 20px;
     background-color: #2a2a2a;
     border-radius: 5px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.tab-content.active {
+    display: block;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
 }
 
 th, td {
@@ -49,15 +74,33 @@ th {
     color: #c5a059;
 }
 
-button {
-    background-color: #c5a059;
-    color: #1a1a1a;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
+/* Стили для вкладки "Ссылка" */
+.url-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
 }
 
-button:hover {
-    background-color: #d4b070;
+#site-url {
+    color: #c5a059;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+#site-url:hover {
+    text-decoration: underline;
+}
+
+#copy-url {
+    background: #3a3a3a;
+    color: #e0e0e0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#copy-url:hover {
+    background: #4a4a4a;
 }
