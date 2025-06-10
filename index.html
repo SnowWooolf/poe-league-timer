@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>До массовой уэкуляции</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>До массовой уэкуляции</h1>
+        <div id="timer"></div>
+    </header>
+
+    <main>
+        <div class="tabs">
+            <button class="tab-button active" data-tab="tab1">Таблица 1</button>
+            <button class="tab-button" data-tab="tab2">Таблица 2</button>
+            <button class="tab-button" data-tab="tab3">Таблица 3</button>
+        </div>
+
+        <div id="tab1" class="tab-content active">
+            <!-- Содержимое первой таблицы -->
+            <table>
+                <tr>
+                    <th>Игрок</th>
+                    <th>Уровень</th>
+                    <th>Прогресс</th>
+                </tr>
+                <!-- Данные будут добавляться динамически -->
+            </table>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <!-- Содержимое второй таблицы -->
+        </div>
+
+        <div id="tab3" class="tab-content">
+            <!-- Содержимое третьей таблицы -->
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
