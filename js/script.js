@@ -1,4 +1,4 @@
-// Таймер (исправлен на 23:00)
+// Таймер
 function updateTimer() {
     const endDate = new Date('2025-06-13T23:00:00+03:00'); // МСК
     const now = new Date();
@@ -20,49 +20,28 @@ function updateTimer() {
 setInterval(updateTimer, 1000);
 updateTimer();
 
-// Управление таблицей
-const table = document.getElementById('players-table');
-const addRowBtn = document.getElementById('add-row');
-
-// Загрузка данных из localStorage
-function loadTable() {
-    const savedData = localStorage.getItem('poePlayers');
-    if (savedData) {
-        table.querySelector('tbody').innerHTML = savedData;
-    }
-}
-
-// Сохранение данных в localStorage
-function saveTable() {
-    const tableContent = table.querySelector('tbody').innerHTML;
-    localStorage.setItem('poePlayers', tableContent);
-}
-
-// Добавление новой строки
-addRowBtn.addEventListener('click', () => {
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-        <td contenteditable="true"></td>
-        <td contenteditable="true"></td>
-        <td contenteditable="true"></td>
-        <td><button class="delete-row">Удалить</button></td>
-    `;
-    table.querySelector('tbody').appendChild(newRow);
-    saveTable();
+// Переключение вкладок
+document.querySelectorAll('.tab-button').forEach(button => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(button.dataset.tab).classList.add('active');
+    });
 });
 
-// Удаление строки
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('delete-row')) {
-        e.target.closest('tr').remove();
-        saveTable();
-    }
-});
+// Автоматическое определение и копирование ссылки
+document.addEventListener('DOMContentLoaded', function() {
+    const currentUrl = window.location.href;
+    const urlElement = document.getElementById('site-url');
+    urlElement.textContent = currentUrl;
+    urlElement.href = currentUrl;
 
-// Редактирование ячеек
-table.addEventListener('input', () => {
-    saveTable();
+    document.getElementById('copy-url').addEventListener('click', function() {
+        navigator.clipboard.writeText(currentUrl).then(() => {
+            const message = document.getElementById('copy-message');
+            message.style.display = 'block';
+            setTimeout(() => message.style.display = 'none', 2000);
+        });
+    });
 });
-
-// Загружаем таблицу при старте
-document.addEventListener('DOMContentLoaded', loadTable);
