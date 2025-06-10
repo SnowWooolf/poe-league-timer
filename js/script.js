@@ -1,6 +1,6 @@
-// Таймер
+// Таймер (исправлен на 23:00)
 function updateTimer() {
-    const endDate = new Date('2025-06-13T23:00:00');
+    const endDate = new Date('2025-06-13T23:00:00+03:00'); // МСК
     const now = new Date();
     const diff = endDate - now;
 
@@ -14,29 +14,55 @@ function updateTimer() {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    document.getElementById('timer').innerHTML = 
-        `${days}д ${hours}ч ${minutes}м ${seconds}с`;
+    document.getElementById('timer').innerHTML = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
 }
 
 setInterval(updateTimer, 1000);
 updateTimer();
 
-// Переключение вкладок
-document.querySelectorAll('.tab-button').forEach(button => {
-    button.addEventListener('click', () => {
-        // Удаляем активный класс у всех кнопок и вкладок
-        document.querySelectorAll('.tab-button').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
-        });
+// Управление таблицей
+const table = document.getElementById('players-table');
+const addRowBtn = document.getElementById('add-row');
 
-        // Добавляем активный класс к выбранной кнопке и вкладке
-        button.classList.add('active');
-        document.getElementById(button.dataset.tab).classList.add('active');
-    });
+// Загрузка данных из localStorage
+function loadTable() {
+    const savedData = localStorage.getItem('poePlayers');
+    if (savedData) {
+        table.querySelector('tbody').innerHTML = savedData;
+    }
+}
+
+// Сохранение данных в localStorage
+function saveTable() {
+    const tableContent = table.querySelector('tbody').innerHTML;
+    localStorage.setItem('poePlayers', tableContent);
+}
+
+// Добавление новой строки
+addRowBtn.addEventListener('click', () => {
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td><button class="delete-row">Удалить</button></td>
+    `;
+    table.querySelector('tbody').appendChild(newRow);
+    saveTable();
 });
 
-// Здесь можно добавить логику для работы с таблицами
-// Например, получение данных с сервера или localStorage
+// Удаление строки
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete-row')) {
+        e.target.closest('tr').remove();
+        saveTable();
+    }
+});
+
+// Редактирование ячеек
+table.addEventListener('input', () => {
+    saveTable();
+});
+
+// Загружаем таблицу при старте
+document.addEventListener('DOMContentLoaded', loadTable);
