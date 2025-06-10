@@ -13,30 +13,22 @@
     </header>
 
     <main>
-        <div class="tabs">
-            <button class="tab-button active" data-tab="tab1">Таблица 1</button>
-            <button class="tab-button" data-tab="tab2">Таблица 2</button>
-            <button class="tab-button" data-tab="tab3">Таблица 3</button>
-        </div>
-
-        <div id="tab1" class="tab-content active">
-            <!-- Содержимое первой таблицы -->
-            <table>
-                <tr>
-                    <th>Игрок</th>
-                    <th>Уровень</th>
-                    <th>Прогресс</th>
-                </tr>
-                <!-- Данные будут добавляться динамически -->
+        <!-- Единственная таблица -->
+        <div class="table-container">
+            <table id="players-table">
+                <thead>
+                    <tr>
+                        <th>Игрок</th>
+                        <th>Уровень</th>
+                        <th>Прогресс</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Строки будут добавляться через JS -->
+                </tbody>
             </table>
-        </div>
-
-        <div id="tab2" class="tab-content">
-            <!-- Содержимое второй таблицы -->
-        </div>
-
-        <div id="tab3" class="tab-content">
-            <!-- Содержимое третьей таблицы -->
+            <button id="add-row">+ Добавить игрока</button>
         </div>
     </main>
 
