@@ -1,11 +1,11 @@
 // Таймер
 function updateTimer() {
-    const endDate = new Date('2025-06-13T23:00:00+03:00'); // МСК
+    const endDate = new Date('2025-06-13T23:00:00+03:00');
     const now = new Date();
     const diff = endDate - now;
 
     if (diff <= 0) {
-        document.getElementById('timer').innerHTML = "Массовая уэкуляция началась!";
+        document.getElementById('timer').innerHTML = "Лига началась!";
         return;
     }
 
@@ -17,31 +17,18 @@ function updateTimer() {
     document.getElementById('timer').innerHTML = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
 }
 
-setInterval(updateTimer, 1000);
-updateTimer();
-
-// Переключение вкладок
-document.querySelectorAll('.tab-button').forEach(button => {
-    button.addEventListener('click', () => {
-        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-        button.classList.add('active');
-        document.getElementById(button.dataset.tab).classList.add('active');
-    });
-});
-
-// Автоматическое определение и копирование ссылки
+// Автоопределение ссылки сайта
 document.addEventListener('DOMContentLoaded', function() {
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
     const currentUrl = window.location.href;
     const urlElement = document.getElementById('site-url');
-    urlElement.textContent = currentUrl;
     urlElement.href = currentUrl;
+    urlElement.textContent = currentUrl;
 
     document.getElementById('copy-url').addEventListener('click', function() {
-        navigator.clipboard.writeText(currentUrl).then(() => {
-            const message = document.getElementById('copy-message');
-            message.style.display = 'block';
-            setTimeout(() => message.style.display = 'none', 2000);
-        });
+        navigator.clipboard.writeText(currentUrl);
+        document.getElementById('copy-message').textContent = "Скопировано!";
     });
 });
